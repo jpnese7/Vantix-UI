@@ -109,7 +109,7 @@ function Library:CreateWindow(Title)
 
                 local TabContent = Instance.new("ScrollingFrame")
                 TabContent.Name = Name .. "Content"
-                TabContent.Parent = ContentContainer"
+                TabContent.Parent = ContentContainer
                 TabContent.BackgroundTransparency = 1
                 TabContent.BorderSizePixel = 0
                 TabContent.Size = UDim2.new(1, 0, 1, 0)
