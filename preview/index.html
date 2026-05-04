@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vantix UI - Premium Roblox Library</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div id="app">
+        <header class="site-header">
+            <div class="logo">
+                <span class="logo-icon"><i data-lucide="zap"></i></span>
+                <h1>Vantix <span>UI</span></h1>
+            </div>
+            <nav>
+                <a href="#features">Features</a>
+                <a href="#documentation">Docs</a>
+                <a href="https://github.com/" class="btn-primary">Get Started</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero">
+                <div class="hero-content">
+                    <h2>The Most <span>Smooth</span> & <span>Animated</span> UI Library for Roblox.</h2>
+                    <p>Elevate your scripts with a premium interface that feels like a native application. Lightweight, powerful, and beautiful.</p>
+                    <div class="hero-actions">
+                        <button class="btn-glow" onclick="window.location.hash='#preview'">Live Preview</button>
+                        <button class="btn-secondary" onclick="copyCode()">Copy Loadstring</button>
+                    </div>
+                </div>
+                
+                <!-- This is the interactive Preview UI -->
+                <div id="preview" class="gui-container">
+                    <div class="roblox-window">
+                        <div class="window-header">
+                            <div class="header-left">
+                                <i data-lucide="layout" size="16"></i>
+                                <span>Vantix UI - Preview</span>
+                            </div>
+                            <div class="header-right">
+                                <button class="window-btn"><i data-lucide="minus"></i></button>
+                                <button class="window-btn close"><i data-lucide="x"></i></button>
+                            </div>
+                        </div>
+                        <div class="window-body">
+                            <aside class="sidebar">
+                                <div class="sidebar-item active" data-tab="main">
+                                    <i data-lucide="home"></i> <span>Main</span>
+                                </div>
+                                <div class="sidebar-item" data-tab="settings">
+                                    <i data-lucide="settings"></i> <span>Settings</span>
+                                </div>
+                                <div class="sidebar-item" data-tab="visuals">
+                                    <i data-lucide="eye"></i> <span>Visuals</span>
+                                </div>
+                                <div class="sidebar-footer">
+                                    <span class="status">Status: <span>Online</span></span>
+                                </div>
+                            </aside>
+                            <section class="content-area">
+                                <div class="tab-content active" id="tab-main">
+                                    <div class="section-title">Common Features</div>
+                                    <div class="control-row">
+                                        <div class="control-label">
+                                            <span class="title">Walkspeed</span>
+                                            <span class="desc">Adjust your player speed</span>
+                                        </div>
+                                        <div class="slider-container">
+                                            <input type="range" min="16" max="250" value="16" class="slider">
+                                            <span class="slider-value">16</span>
+                                        </div>
+                                    </div>
+                                    <div class="control-row">
+                                        <div class="control-label">
+                                            <span class="title">Infinite Jump</span>
+                                            <span class="desc">Jump as much as you want</span>
+                                        </div>
+                                        <div class="toggle-container">
+                                            <input type="checkbox" id="toggle-jump" class="toggle-input">
+                                            <label for="toggle-jump" class="toggle-label"></label>
+                                        </div>
+                                    </div>
+                                    <button class="gui-button">Execute Script</button>
+                                </div>
+                                <div class="tab-content" id="tab-settings">
+                                    <div class="section-title">UI Settings</div>
+                                    <div class="control-row">
+                                        <div class="control-label">
+                                            <span class="title">Accent Color</span>
+                                            <span class="desc">Change the UI color theme</span>
+                                        </div>
+                                        <div class="color-picker">
+                                            <div class="color-preview" style="background: var(--accent-primary);"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <section id="documentation" class="docs-section">
+            <h2>Quick Start</h2>
+            <div class="code-block">
+                <pre><code>local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/user/repo/main/AntigravityLib.lua"))()
+
+local Window = Library:CreateWindow({
+    Name = "My Script Hub",
+    LoadingTitle = "Antigravity UI",
+    LoadingSubtitle = "by YourName"
+})
+
+local Tab = Window:CreateTab("Main")
+
+Tab:CreateButton("Click Me", function()
+    print("Hello World!")
+end)
+
+Tab:CreateToggle("Fly", false, function(Value)
+    print("Fly is now: " .. tostring(Value))
+end)</code></pre>
+                <button class="copy-btn" onclick="copyFullCode()"><i data-lucide="copy"></i></button>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Antigravity UI. Published for free on GitHub.</p>
+        </footer>
+    </div>
+    <script src="main.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
