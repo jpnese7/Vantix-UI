@@ -302,8 +302,6 @@ function Library:CreateWindow(Config)
             Tween(TabTitle, {TextColor3 = Library.Theme.Accent}, 0.3)
             
             TabContent.Visible = true
-            TabContent.GroupTransparency = 1
-            Tween(TabContent, {GroupTransparency = 0}, 0.3)
         end
         
         TabBtn.MouseButton1Click:Connect(SelectTab)
