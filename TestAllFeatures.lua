@@ -16,8 +16,8 @@ end)
 if success then
     Vantix = err
 else
-    -- Remote fallback
-    local load_url = "https://raw.githubusercontent.com/jpnese7/Vantix-UI/main/VantixLib.lua?t=" .. tostring(tick())
+    -- Remote fallback (Bypass aggressive CDN cache)
+    local load_url = "https://raw.githubusercontent.com/jpnese7/Vantix-UI/refs/heads/main/VantixLib.lua?t=" .. tostring(tick())
     local raw_content = game:HttpGet(load_url, true)
     Vantix = loadstring(raw_content)()
 end
