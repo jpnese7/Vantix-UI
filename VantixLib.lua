@@ -390,6 +390,54 @@ function Library:CreateWindow(Config)
     Divider.Size = UDim2.new(1, 0, 0, 1)
     self:ApplyTheme(Divider, "BackgroundColor3", "Border")
     
+    -- Window Controls
+    local CloseBtn = Instance.new("TextButton")
+    CloseBtn.Parent = Header
+    CloseBtn.BackgroundTransparency = 1
+    CloseBtn.Position = UDim2.new(1, -35, 0, 7)
+    CloseBtn.Size = UDim2.new(0, 30, 0, 30)
+    CloseBtn.Font = Enum.Font.GothamBold
+    CloseBtn.Text = "X"
+    CloseBtn.TextSize = 14
+    self:ApplyTheme(CloseBtn, "TextColor3", "TextMuted")
+    
+    local MinBtn = Instance.new("TextButton")
+    MinBtn.Parent = Header
+    MinBtn.BackgroundTransparency = 1
+    MinBtn.Position = UDim2.new(1, -65, 0, 7)
+    MinBtn.Size = UDim2.new(0, 30, 0, 30)
+    MinBtn.Font = Enum.Font.GothamBold
+    MinBtn.Text = "-"
+    MinBtn.TextSize = 18
+    self:ApplyTheme(MinBtn, "TextColor3", "TextMuted")
+    
+    CloseBtn.MouseEnter:Connect(function() Tween(CloseBtn, {TextColor3 = Color3.fromRGB(255, 60, 60)}, 0.2) end)
+    CloseBtn.MouseLeave:Connect(function() Tween(CloseBtn, {TextColor3 = Library.Themes[Library.CurrentTheme].TextMuted}, 0.2) end)
+    
+    MinBtn.MouseEnter:Connect(function() Tween(MinBtn, {TextColor3 = Library.Themes[Library.CurrentTheme].Text}, 0.2) end)
+    MinBtn.MouseLeave:Connect(function() Tween(MinBtn, {TextColor3 = Library.Themes[Library.CurrentTheme].TextMuted}, 0.2) end)
+    
+    local isMinimized = false
+    MinBtn.MouseButton1Click:Connect(function()
+        isMinimized = not isMinimized
+        if isMinimized then
+            Main.ClipsDescendants = true
+            Tween(Main, {Size = UDim2.new(0, 650, 0, 45)}, 0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
+        else
+            Tween(Main, {Size = UDim2.new(0, 650, 0, 450)}, 0.4, Enum.EasingStyle.Quint, Enum.EasingDirection.Out)
+            task.delay(0.4, function()
+                if not isMinimized then Main.ClipsDescendants = false end
+            end)
+        end
+    end)
+    
+    CloseBtn.MouseButton1Click:Connect(function()
+        Main.ClipsDescendants = true
+        Tween(Main, {Size = UDim2.new(0, 650, 0, 0)}, 0.4, Enum.EasingStyle.Exponential, Enum.EasingDirection.In)
+        task.wait(0.4)
+        VantixGui:Destroy()
+    end)
+    
     -- Sidebar
     local Sidebar = Instance.new("Frame")
     Sidebar.Name = "Sidebar"
@@ -919,6 +967,103 @@ function Library:CreateWindow(Config)
                 Tween(TextBox, {Size = UDim2.new(0.4, 0, 0, 26)}, 0.3)
                 Tween(TBStroke, {Color = Library.Themes[Library.CurrentTheme].Border}, 0.3)
                 if enter then Callback(TextBox.Text) end
+            end)
+        end
+        
+        function Elements:CreateLabel(TextContent)
+            local LblFrame = Instance.new("Frame")
+            LblFrame.Parent = TabContent
+            LblFrame.Size = UDim2.new(0.95, 0, 0, 30)
+            LblFrame.BackgroundTransparency = 1
+            
+            local LLabel = Instance.new("TextLabel")
+            LLabel.Parent = LblFrame
+            LLabel.Size = UDim2.new(1, -30, 1, 0)
+            LLabel.Position = UDim2.new(0, 15, 0, 0)
+            LLabel.BackgroundTransparency = 1
+            LLabel.Font = Enum.Font.Gotham
+            LLabel.Text = TextContent
+            LLabel.TextSize = 13
+            LLabel.TextXAlignment = Enum.TextXAlignment.Left
+            Library:ApplyTheme(LLabel, "TextColor3", "Text")
+            
+            local LabelObj = {}
+            function LabelObj:SetText(newText)
+                LLabel.Text = newText
+            end
+            return LabelObj
+        end
+        
+        function Elements:CreateKeybind(BindText, DefaultKey, Callback)
+            local BindFrame = Instance.new("Frame")
+            BindFrame.Parent = TabContent
+            BindFrame.Size = UDim2.new(0.95, 0, 0, 40)
+            Library:ApplyTheme(BindFrame, "BackgroundColor3", "Element")
+            
+            local BCorner = Instance.new("UICorner")
+            BCorner.CornerRadius = UDim.new(0, 6)
+            BCorner.Parent = BindFrame
+            
+            local BStroke = Instance.new("UIStroke")
+            BStroke.Parent = BindFrame
+            Library:ApplyTheme(BStroke, "Color", "Border")
+            
+            local BindLabel = Instance.new("TextLabel")
+            BindLabel.Parent = BindFrame
+            BindLabel.BackgroundTransparency = 1
+            BindLabel.Position = UDim2.new(0, 15, 0, 0)
+            BindLabel.Size = UDim2.new(0.5, 0, 1, 0)
+            BindLabel.Font = Enum.Font.GothamMedium
+            BindLabel.Text = BindText
+            BindLabel.TextSize = 14
+            BindLabel.TextXAlignment = Enum.TextXAlignment.Left
+            Library:ApplyTheme(BindLabel, "TextColor3", "Text")
+            
+            local KeyBtn = Instance.new("TextButton")
+            KeyBtn.Parent = BindFrame
+            KeyBtn.AnchorPoint = Vector2.new(1, 0.5)
+            KeyBtn.Position = UDim2.new(1, -10, 0.5, 0)
+            KeyBtn.Size = UDim2.new(0, 100, 0, 26)
+            KeyBtn.Font = Enum.Font.GothamBold
+            KeyBtn.Text = DefaultKey.Name
+            KeyBtn.TextSize = 13
+            Library:ApplyTheme(KeyBtn, "BackgroundColor3", "Background")
+            Library:ApplyTheme(KeyBtn, "TextColor3", "Accent")
+            
+            local KCorner = Instance.new("UICorner")
+            KCorner.CornerRadius = UDim.new(0, 4)
+            KCorner.Parent = KeyBtn
+            
+            local KStroke = Instance.new("UIStroke")
+            KStroke.Parent = KeyBtn
+            Library:ApplyTheme(KStroke, "Color", "Border")
+            
+            local currentKey = DefaultKey
+            local isListening = false
+            local connection
+            
+            KeyBtn.MouseButton1Click:Connect(function()
+                if isListening then return end
+                isListening = true
+                KeyBtn.Text = "..."
+                Tween(KStroke, {Color = Library.Themes[Library.CurrentTheme].Accent}, 0.2)
+                
+                connection = UserInputService.InputBegan:Connect(function(input)
+                    if input.UserInputType == Enum.UserInputType.Keyboard then
+                        currentKey = input.KeyCode
+                        KeyBtn.Text = currentKey.Name
+                        isListening = false
+                        Tween(KStroke, {Color = Library.Themes[Library.CurrentTheme].Border}, 0.2)
+                        connection:Disconnect()
+                        Callback(currentKey)
+                    end
+                end)
+            end)
+            
+            UserInputService.InputBegan:Connect(function(input, gpe)
+                if not gpe and not isListening and input.KeyCode == currentKey then
+                    Callback(currentKey)
+                end
             end)
         end
         return Elements
