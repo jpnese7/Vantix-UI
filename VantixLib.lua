@@ -263,7 +263,6 @@ function Library:CreateWindow(Config)
     Main.Position = UDim2.new(0.5, -325, 0.5, -225)
     Main.Size = UDim2.new(0, 650, 0, 450)
     Main.ClipsDescendants = false
-    Main.GroupTransparency = Config.LoadingTitle and 1 or 0
     Main.Visible = not Config.LoadingTitle
     self:ApplyTheme(Main, "BackgroundColor3", "Background")
     
@@ -336,7 +335,7 @@ function Library:CreateWindow(Config)
             Main.Visible = true
             Main.Size = UDim2.new(0, 650, 0, 0)
             Main.ClipsDescendants = true
-            Tween(Main, {GroupTransparency = 0, Size = UDim2.new(0, 650, 0, 450)}, 0.8, Enum.EasingStyle.Exponential)
+            Tween(Main, {Size = UDim2.new(0, 650, 0, 450)}, 0.8, Enum.EasingStyle.Exponential)
             task.wait(0.8)
             Main.ClipsDescendants = false
         end)
