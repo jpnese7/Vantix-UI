@@ -563,6 +563,7 @@ function Library:CreateWindow(Config)
         Library:ApplyTheme(TabTitle, "TextColor3", "TextMuted")
         
         local Indicator = Instance.new("Frame")
+        Indicator.Name = "Indicator"
         Indicator.Parent = TabBtn
         Indicator.Size = UDim2.new(0, 3, 0, 14)
         Indicator.Position = UDim2.new(0, 0, 0.5, -7)
