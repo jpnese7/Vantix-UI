@@ -1,13 +1,10 @@
 --[[
-    Vantix Advanced Serverside Execution Framework (V-ASEF)
-    Reference Implementation & Educational Research Suite
-    Version: 4.0.0 (Premium Rayfield Architecture)
-    
-    Security Architecture Overview:
+    V-ASEF Premium Interface Integration (v5.0.0)
+    Features:
     - Kernel-level hook simulation for Byfron/Hyperion integrity monitoring.
     - Dynamic memory shadowing for undocumented engine offsets.
     - RCE Pipeline via encrypted remote event tunneling.
-    - Premium fluid-dynamic UI rendering engine with live theming.
+    - Glassmorphism & Glow premium fluid-dynamic UI rendering engine.
 ]]
 
 -- Loading mechanism: Local file preference
@@ -31,67 +28,80 @@ end
 
 -- Initialize the Premium Interface with a Cinematic Loading Sequence
 local Window = Vantix:CreateWindow({
-    Name = "V-ASEF // RESEARCH EDITION v4",
-    LoadingTitle = "V-ASEF SECURE_BOOT",
-    LoadingSubtitle = "Authenticating hardware signature..."
+    Name = "V-ASEF // RESEARCH EDITION v5",
+    LoadingTitle = "V-ASEF NEXUS_BOOT",
+    LoadingSubtitle = "Authenticating premium hardware signature..."
 })
 
 -- 1. Execution Core Tab
 local Execution = Window:CreateTab("Execution")
 
 Execution:CreateSection("Payload Delivery System")
-Execution:CreateParagraph("The execution core uses an encrypted pipeline to deliver arbitrary Luau bytecode directly into the VM state, completely bypassing local telemetry hooks.")
 
-Execution:CreateInput("RCE Payload", "Enter Luau script...", function(val)
+Execution:CreateParagraph("V-ASEF dynamically encrypts payloads in memory to evade the latest Byfron heuristic sweeps. Execute with extreme caution.")
+
+Execution:CreateInput("Luau Payload Injector", "Enter remote script URL...", function(input)
     Vantix:Notify({
-        Title = "Payload Staged",
-        Content = "Script buffered into memory successfully.",
+        Title = "Injection Initialized",
+        Content = "Attempting to tunnel payload from: " .. input,
+        Duration = 4
+    })
+    print("[V-ASEF] Payload received: " .. input)
+end)
+
+Execution:CreateButton("Execute Local Buffer", function()
+    Vantix:Notify({
+        Title = "Buffer Executed",
+        Content = "The local script buffer has been compiled and executed successfully.",
         Duration = 3
     })
-    print("[V-ASEF] Payload Staged: " .. val)
+    print("[V-ASEF] Local buffer execution triggered.")
 end)
 
-Execution:CreateButton("Execute Bytecode", function()
-    Vantix:Notify({
-        Title = "Execution Initiated",
-        Content = "Bytecode injected into the VM state.",
-        Duration = 3
-    })
-    print("[V-ASEF] Execution successful.")
-end)
+Execution:CreateSection("Anti-Detection")
 
-Execution:CreateButton("Clear Stack", function()
+Execution:CreateToggle("Hyperion Memory Cloak", true, function(state)
+    local status = state and "ENABLED" or "DISABLED"
     Vantix:Notify({
-        Title = "Stack Cleared",
-        Content = "All buffered payloads have been scrubbed from memory.",
+        Title = "Security Module",
+        Content = "Hyperion Memory Cloaking is now " .. status,
         Duration = 3
     })
 end)
 
-Execution:CreateToggle("Auto-Inject on Teleport", true, function(state)
-    print("[V-ASEF] Auto-Injection: " .. (state and "ENABLED" or "DISABLED"))
+Execution:CreateToggle("Thread Identity Spoofing", false, function(state)
+    print("[V-ASEF] Identity Spoofing:", state)
 end)
 
--- 2. Bypasses Tab
-local Bypasses = Window:CreateTab("Bypasses")
+-- 2. Exploitation Tools Tab
+local Tools = Window:CreateTab("Tools")
 
-Bypasses:CreateSection("Anti-Tamper Neutralization")
-Bypasses:CreateParagraph("These modules manipulate internal game structures to prevent the anti-cheat from detecting the execution framework.")
+Tools:CreateSection("Instance Manipulation")
 
-Bypasses:CreateToggle("Hyperion VMT Bypass", true, function(state)
-    if state then
-        Vantix:Notify({Title = "Security", Content = "VMT Hooking enabled. Engine monitoring is now blind.", Duration = 4})
-    else
-        Vantix:Notify({Title = "Warning", Content = "VMT Hooking disabled. You are exposed.", Duration = 4})
-    end
+Tools:CreateDropdown("Target Selection", {"LocalPlayer", "Workspace", "Lighting", "CoreGui", "NetworkClient"}, "LocalPlayer", function(val)
+    Vantix:Notify({
+        Title = "Target Acquired",
+        Content = "Manipulation routines pointed to: " .. val,
+        Duration = 3
+    })
 end)
 
-Bypasses:CreateToggle("Byfron Memory Shadowing", false, function(state)
-    print("[V-ASEF] Memory Shadowing: " .. (state and "ACTIVE" or "OFFLINE"))
+Tools:CreateSlider("WalkSpeed Multiplier", 1, 10, 1, function(val)
+    print("[V-ASEF] WalkSpeed hooked. Multiplier:", val)
 end)
 
-Bypasses:CreateSlider("Thread Tick Rate", 1, 60, 30, function(val)
-    print("[V-ASEF] Internal Thread Tick adjusted to: " .. val .. " hz")
+Tools:CreateSlider("JumpPower Override", 50, 500, 50, function(val)
+    print("[V-ASEF] JumpPower hooked. Value:", val)
+end)
+
+Tools:CreateSection("Network Hooks")
+
+Tools:CreateToggle("Spy RemoteEvents", true, function(state)
+    print("[V-ASEF] RemoteEvent Spy:", state)
+end)
+
+Tools:CreateToggle("Block TeleportService", false, function(state)
+    print("[V-ASEF] Teleport Blocker:", state)
 end)
 
 -- 3. Visuals & Config
@@ -99,14 +109,27 @@ local Visuals = Window:CreateTab("Settings")
 
 Visuals:CreateSection("Overlay Configuration")
 
--- Live Theme Engine Demonstration
-Visuals:CreateDropdown("UI Theme Preset", {"Deep Space", "Emerald Stealth", "Crimson Threat", "Amethyst Void"}, "Deep Space", function(val)
+-- Live Theme Engine Demonstration (V5 Expanded)
+Visuals:CreateDropdown("UI Theme Preset", {
+    "Deep Space", 
+    "Emerald Stealth", 
+    "Crimson Threat", 
+    "Amethyst Void",
+    "Cyberpunk 2077",
+    "Rose Gold",
+    "Glacier",
+    "Midnight Obsidian"
+}, "Deep Space", function(val)
     Vantix:SetTheme(val)
     Vantix:Notify({
-        Title = "Theme Applied",
-        Content = "Live rendering engine updated to " .. val .. ".",
+        Title = "Aesthetic Shift",
+        Content = "Live rendering engine updated to " .. val .. " theme.",
         Duration = 3
     })
+end)
+
+Visuals:CreateColorPicker("ESP Accent Color", Color3.fromRGB(0, 140, 255), function(color)
+    print("[V-ASEF] Custom ESP Color generated:", color)
 end)
 
 Visuals:CreateSlider("UI Render Quality", 1, 10, 10, function(val)
@@ -136,4 +159,4 @@ Visuals:CreateButton("Emergency Self-Destruct", function()
     Vantix:Notify({Title = "CRITICAL", Content = "Executing memory wipe and UI destruction protocol...", Duration = 5})
 end)
 
-print("[V-ASEF] Premium UI initialized successfully.")
+print("[V-ASEF] V5 Premium UI initialized successfully.")
