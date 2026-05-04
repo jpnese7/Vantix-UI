@@ -254,6 +254,7 @@ function Library:CreateWindow(Config)
         TabBtnCorner.Parent = TabBtn
         
         local TabTitle = Instance.new("TextLabel")
+        TabTitle.Name = "Title"
         TabTitle.Parent = TabBtn
         TabTitle.BackgroundTransparency = 1
         TabTitle.Position = UDim2.new(0, 15, 0, 0)
@@ -293,11 +294,10 @@ function Library:CreateWindow(Config)
             if WindowObj.CurrentTab == TabBtn then return end
             if WindowObj.CurrentTab then
                 Tween(WindowObj.CurrentTab, {BackgroundColor3 = Library.Theme.Sidebar}, 0.3)
-                Tween(WindowObj.CurrentTab.Title, {TextColor3 = Library.Theme.TextMuted}, 0.3)
+                Tween(WindowObj.CurrentTab:FindFirstChild("Title"), {TextColor3 = Library.Theme.TextMuted}, 0.3)
                 WindowObj.Tabs[WindowObj.CurrentTab].Visible = false
             end
             WindowObj.CurrentTab = TabBtn
-            TabBtn.Title = TabTitle
             Tween(TabBtn, {BackgroundColor3 = Library.Theme.Element}, 0.3)
             Tween(TabTitle, {TextColor3 = Library.Theme.Accent}, 0.3)
             
