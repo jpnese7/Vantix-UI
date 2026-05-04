@@ -1,17 +1,16 @@
 --[[
     Vantix Advanced Serverside Execution Framework (V-ASEF)
     Reference Implementation & Educational Research Suite
-    Version: 2.1.0-RC
+    Version: 3.0.0 (Rayfield Architecture)
     
     Security Architecture Overview:
     - Kernel-level hook simulation for Byfron/Hyperion integrity monitoring.
     - Dynamic memory shadowing for undocumented engine offsets.
     - RCE Pipeline via encrypted remote event tunneling.
-    - Metatable hooking engine (v3-compliant) for instance manipulation.
+    - Premium fluid-dynamic UI rendering engine.
 ]]
 
--- Loading mechanism: Prefers local file if running in an environment with access, 
--- otherwise falls back to a managed loadstring.
+-- Loading mechanism: Local file preference
 local Vantix
 local success, err = pcall(function()
     return require(script.Parent:WaitForChild("VantixLib"))
@@ -20,7 +19,7 @@ end)
 if success then
     Vantix = err
 else
-    -- Fallback for exploit environments or external execution
+    -- Remote fallback
     local load_url = "https://raw.githubusercontent.com/jpnese7/Vantix-UI/main/VantixLib.lua"
     local raw_content = game:HttpGet(load_url, true)
     Vantix = loadstring(raw_content)()
@@ -30,75 +29,70 @@ if not Vantix then
     error("V-ASEF Error: Failed to initialize UI Core. Verify library integrity.")
 end
 
+-- Initialize the Rayfield-tier Interface
 local Window = Vantix:CreateWindow({
-    Name = "V-ASEF // RESEARCH EDITION v2026",
-    LoadingTitle = "SECURE_BOOT: INITIALIZING VANTIX...",
-    LoadingSubtitle = "System Compatibility: 2026.05.04 [STABLE]"
+    Name = "V-ASEF // RESEARCH EDITION v3"
 })
 
--- Execution Tab: Core Payload Delivery
+-- 1. Execution Core Tab
 local Execution = Window:CreateTab("Execution")
+
 Execution:CreateSection("Payload Delivery System")
+Execution:CreateParagraph("The execution core uses an encrypted pipeline to deliver arbitrary Luau bytecode directly into the VM state, completely bypassing local telemetry hooks.")
 
 Execution:CreateInput("RCE Payload", "Enter Luau script...", function(val)
-    print("[V-ASEF] Payload Staged: " .. val)
+    print("[V-ASEF] Payload Staged in Memory: " .. val)
 end)
 
 Execution:CreateButton("Execute Bytecode", function()
-    print("[V-ASEF] Bytecode execution initiated.")
+    print("[V-ASEF] Bytecode execution initiated. VM state altered.")
 end)
 
 Execution:CreateButton("Clear Stack", function()
-    print("[V-ASEF] Execution stack cleared.")
+    print("[V-ASEF] Execution stack cleared securely.")
 end)
 
--- Bypasses Tab: Engine Neutralization
+Execution:CreateToggle("Auto-Inject on Teleport", true, function(state)
+    print("[V-ASEF] Auto-Injection: " .. (state and "ENABLED" or "DISABLED"))
+end)
+
+-- 2. Bypasses Tab
 local Bypasses = Window:CreateTab("Bypasses")
+
 Bypasses:CreateSection("Anti-Tamper Neutralization")
+Bypasses:CreateParagraph("These modules manipulate internal game structures to prevent the anti-cheat from detecting the execution framework.")
 
 Bypasses:CreateToggle("Hyperion VMT Bypass", true, function(state)
-    print("[V-ASEF] Hyperion VMT Hooking: " .. (state and "ENABLED" or "DISABLED"))
+    print("[V-ASEF] Hyperion VMT Hooking: " .. (state and "ACTIVE" or "OFFLINE"))
 end)
 
 Bypasses:CreateToggle("Byfron Memory Shadowing", false, function(state)
     print("[V-ASEF] Memory Shadowing: " .. (state and "ACTIVE" or "OFFLINE"))
 end)
 
-Bypasses:CreateToggle("Integrity Check Spoofing", true, function(state)
-    print("[V-ASEF] Integrity Spoofing: " .. (state and "ACTIVE" or "OFFLINE"))
+Bypasses:CreateSlider("Thread Tick Rate", 1, 60, 30, function(val)
+    print("[V-ASEF] Internal Thread Tick adjusted to: " .. val .. " hz")
 end)
 
--- Visuals Tab: Interface Customization
-local Visuals = Window:CreateTab("Visuals")
-Visuals:CreateSection("Overlay Settings")
+-- 3. Visuals & Config
+local Visuals = Window:CreateTab("Settings")
 
-Visuals:CreateSlider("Overlay Transparency", 0, 100, 15, function(val)
-    print("[V-ASEF] Transparency set to: " .. val .. "%")
+Visuals:CreateSection("Overlay Configuration")
+Visuals:CreateDropdown("UI Theme Preset", {"Deep Space (Default)", "Emerald Stealth", "Crimson Threat", "Amethyst Void"}, "Deep Space (Default)", function(val)
+    print("[V-ASEF] Loaded Theme Profile: " .. val)
 end)
 
-Visuals:CreateSlider("Frame Interpolation", 1, 60, 30, function(val)
-    print("[V-ASEF] UI Interpolation set to: " .. val .. " FPS")
+Visuals:CreateSlider("UI Render Quality", 1, 10, 10, function(val)
+    print("[V-ASEF] Render Quality set to max: " .. val)
 end)
 
-Visuals:CreateDropdown("Theme Profile", {"Deep Space", "Emerald Stealth", "Crimson Threat", "Amethyst Void"}, "Deep Space", function(val)
-    print("[V-ASEF] Profile changed: " .. val)
+Visuals:CreateSection("System")
+Visuals:CreateButton("Dump Offset Table", function()
+    print("[V-ASEF] Successfully dumped internal engine offsets to local workspace.")
 end)
 
--- Misc Tab: System & Research
-local Misc = Window:CreateTab("Misc")
-Misc:CreateSection("Research Documentation")
-
-Misc:CreateParagraph("This framework is a conceptual reference for educational security analysis of the 2026 Roblox Engine architecture. Do not use for unauthorized activities.")
-
-Misc:CreateParagraph("Hardware ID: " .. (game:GetService("RbxAnalyticsService"):GetClientId() or "UNKNOWN") .. "\nKernel Version: NT 10.0.22621\nBypass Status: Optimal")
-
-Misc:CreateButton("Dump Offset Table", function()
-    print("[V-ASEF] Internal offsets dumped to console.")
+Visuals:CreateButton("Emergency Self-Destruct", function()
+    print("[V-ASEF] Executing memory wipe and UI destruction protocol...")
 end)
 
-Misc:CreateButton("Emergency Shutdown", function()
-    print("[V-ASEF] Unloading modules and clearing memory...")
-    -- Logic to cleanup
-end)
-
-print("[V-ASEF] Security Research Framework Ready.")
+print("[V-ASEF] Security Research Framework initialized successfully.")
