@@ -113,7 +113,21 @@ Visuals:CreateSlider("UI Render Quality", 1, 10, 10, function(val)
     print("[V-ASEF] Render Quality set to max: " .. val)
 end)
 
-Visuals:CreateSection("System")
+Visuals:CreateSection("System Controls")
+
+Visuals:CreateKeybind("Panic Button (Hide GUI)", Enum.KeyCode.RightShift, function(key)
+    Vantix:Notify({Title = "Key Pressed", Content = "You pressed " .. key.Name .. ". (Hide GUI logic would run here)", Duration = 3})
+end)
+
+local PingLabel = Visuals:CreateLabel("Current Ping: 45ms")
+task.spawn(function()
+    while true do
+        task.wait(2)
+        local simulatedPing = math.random(30, 80)
+        PingLabel:SetText("Current Ping: " .. simulatedPing .. "ms")
+    end
+end)
+
 Visuals:CreateButton("Dump Offset Table", function()
     Vantix:Notify({Title = "Dump Complete", Content = "Offsets saved to local workspace.", Duration = 4})
 end)
